@@ -29,6 +29,7 @@ body {
     height: 600px;
     width: 360px;
     box-shadow: 0px 0px 24px #965656;
+    border-radius: 15px;
 }
 
 .screen__content {
