@@ -32,7 +32,7 @@ const Profile = () => {
           setUserData(data);
         })
         .catch((error) => {
-          console.error('Error fetching the user data:', error);
+        //   console.error('Error fetching the user data:', error);
         });
       }
   }, []);

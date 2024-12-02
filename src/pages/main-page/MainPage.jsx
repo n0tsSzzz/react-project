@@ -44,7 +44,7 @@ const MainPage = () => {
           setIsLoading(false);
           setAllNews(newsFromState);
         }
-    }, []);
+    }, [dispatch, newsFromState]);
     
       const startIndex = (currentPage - 1) * newsPerPage;
       const currentCards = allNews.slice(startIndex, startIndex + newsPerPage);
@@ -66,7 +66,7 @@ const MainPage = () => {
         <main className="content">
             {
                 currentCards.map((card) => (
-                    <div className="message-box">
+                    <div className="message-box" key={card.name}>
                         <p><b>{card.name}</b></p>
                         <br/>
                         <p>{card.description}</p>
