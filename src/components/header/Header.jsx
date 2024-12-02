@@ -16,33 +16,30 @@ const Header = () => {
         {!currentUserID ? 
             <header className="header">
                 <div className="nav-left">
-                    <NavLink to="/" className="nav-button" activeClassName="active">
+                    <NavLink to="/" className="nav-button" activeclassname="active">
                         Главная страница
-                    </NavLink>
-                    <NavLink to="/services" className="nav-button" activeClassName="active">
-                        Услуги компании
                     </NavLink>
                 </div>
                 <div className="nav-right">
-                    <NavLink to="/login" className="nav-button" activeClassName="active">
+                    <NavLink to="/login" className="nav-button" activeclassname="active">
                         Вход
                     </NavLink>
                 </div>
             </header>
         : <header className="header">
             <div className="nav-left">
-                <NavLink to="/" className="nav-button" activeClassName="active">
+                <NavLink to="/" className="nav-button" activeclassname="active">
                     Главная страница
                 </NavLink>
-                <NavLink to="/services" className="nav-button" activeClassName="active">
+                <NavLink to="/services" className="nav-button" activeclassname="active">
                     Услуги компании
                 </NavLink>
             </div>
             <div className="nav-right">
-                <NavLink to={`/user/${currentUserID}`} className="nav-button" activeClassName="active">
+                <NavLink to={`/user/${currentUserID}`} className="nav-button" activeclassname="active">
                     Профиль
                 </NavLink>
-                <NavLink onClick={handleLogOut} className="nav-button" activeClassName="active">
+                <NavLink onClick={handleLogOut} className="nav-button" activeclassname="active">
                     Выход
                 </NavLink>
             </div>
