@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pagination } from "@consta/uikit/Pagination";
 import { Loader } from "@consta/uikit/Loader";
 import "./ServicePage.css";
+import { useNavigate } from "react-router-dom";
 
 const SERVICES_URL = "https://673423afa042ab85d1190055.mockapi.io/api/v1/services";
 
@@ -11,6 +12,8 @@ const ServicePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate()
 
   const cardsPerPage = 15;
   
@@ -55,13 +58,13 @@ const ServicePage = () => {
       <main>
         {
             currentCards.map((card) => (
-                <a href={`/services/${card.id}`} className="company-card" key={card.id}>
-                    <img src={card.image} alt={card.name} className="card-image" />
-                    <div>
-                        <h3>{card.name}</h3>
-                        <p style={{marginTop: "10px"}}>{card.description}</p>
-                    </div>
-                </a>
+              <div onClick={() => navigate(`/services/${card.id}`)} className="company-card" key={card.id}>
+                <img src={card.image} alt={card.name} className="card-image" />
+                  <div>
+                      <h3>{card.name}</h3>
+                      <p style={{marginTop: "10px"}}>{card.description}</p>
+                  </div>
+              </div>
             ))
         }
       </main>
