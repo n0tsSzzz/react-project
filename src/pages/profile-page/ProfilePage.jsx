@@ -13,8 +13,8 @@ const Profile = () => {
 
   const [IDFromStorage, setIDFromStorage] = useState(parseInt(localStorage.getItem('id')))
 
-  let accessToken = getToken()
   useEffect(() => {
+    let accessToken = getToken()
     if (accessToken) {
       fetch('https://dummyjson.com/auth/me', {
           method: "GET",

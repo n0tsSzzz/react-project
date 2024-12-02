@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@consta/uikit/Pagination";
 import { Loader } from "@consta/uikit/Loader";
+import { useDispatch, useSelector } from 'react-redux';
+import { set } from './ServicesSlice'
 import "./ServicePage.css";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +10,9 @@ const SERVICES_URL = "https://673423afa042ab85d1190055.mockapi.io/api/v1/service
 
 
 const ServicePage = () => {
+  const dispatch = useDispatch();
+  const servicesFromState = useSelector((state) => state.services.value);
+
   const [allCards, setAllCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,24 +23,33 @@ const ServicePage = () => {
   const cardsPerPage = 15;
   
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(SERVICES_URL);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setAllCards(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    console.log(servicesFromState)
+    if (!servicesFromState.length) {
+      console.log('Fetching..')
+      const fetchData = async () => {
+          setIsLoading(true);
+          try {
+            const response = await fetch(SERVICES_URL);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setAllCards(data);
+            dispatch(set(data));
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setIsLoading(false);
+          }
+      };
+      fetchData();
+    } else {
+      setIsLoading(false);
+      setAllCards(servicesFromState);
+    }
 
-    fetchData();
-  }, []);
+    
+  }, [servicesFromState, dispatch]);
 
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = allCards.slice(startIndex, startIndex + cardsPerPage);
@@ -51,7 +65,6 @@ const ServicePage = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
 
   return (
     <div>
