@@ -4,38 +4,6 @@ import MyCard from '../../components/card/Card';
 import { Loader } from "@consta/uikit/Loader";
 
 const ServiceDetail = () => {
-<<<<<<< Updated upstream
-    const { id } = useParams();
-    const [service, setService] = useState(null);
-    useEffect(() => {
-      fetch(`https://673423afa042ab85d1190055.mockapi.io/api/v1/services/${id}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          setService(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching the service:', error);
-        });
-    }, [id]);
-    return (
-      <>
-        {service ? (
-          <MyCard 
-            imgURI={service.image} 
-            name={service.name} 
-            desc={service.description} 
-            id={service.id} 
-          />
-        ) : (
-          <div>Услуга не найдена.</div>
-        )}
-      </>
-    );
-  };
-  export default ServiceDetail;
-=======
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -89,4 +57,3 @@ const ServiceDetail = () => {
 };
 
 export default ServiceDetail;
->>>>>>> Stashed changes
